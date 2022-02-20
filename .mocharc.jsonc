@@ -1,0 +1,14 @@
+{
+    "jobs": 4,
+    "package": "./package.json",
+    "parallel": true,
+    "require": "ts-node/register",
+    "spec": [
+        "tests/**/*_test.ts"
+    ],
+    "watch-files": [
+        "src/**/*.ts",
+        "tests/**/*.ts"
+    ],
+    "trace-warnings": true
+}

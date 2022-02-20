@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "commonjs",
+        "strict": true,
+        "noEmit": false,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "skipLibCheck": true,
+        "lib": [
+            "es2019",
+            "es6",
+            "dom",
+            "webworker"
+        ],
+        "forceConsistentCasingInFileNames": true
+    },
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "display": "Recommended",
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "./node_modules",
+        "./tests",
+        "**/*.spec.ts"
+    ]
+}
