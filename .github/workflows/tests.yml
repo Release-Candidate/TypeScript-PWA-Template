@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x 17.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,6 +33,34 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm install --dev
-    - run: npm install --save-dev purescript
-    - run: npm run test
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn test
+
+  coverage:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x 17.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install -g yarn
+    - run: yarn install
+    - run: yarn coverage
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      if: ${{ always() }}
+      with:
+        name: "Coverage report"
+        if-no-files-found: ignore
+        path: ./coverage/lcov.info

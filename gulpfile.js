@@ -33,7 +33,7 @@ const serviceWorkerJSMap = serviceWorkerJS + ".map";
 const serviceWorkerTSPath = "./src/service_worker/" + serviceWorkerTS;
 
 // App TS file.
-const appTS = "App.ts";
+const appTS = "app.ts";
 
 // App JS file.
 const appJS = "app.js";
@@ -365,6 +365,10 @@ function cleanHTTP(cb) {
     cb();
 }
 
+function deleteCopiedTSFiles(cb) {
+    del([`${outDir}/*.ts`], cb);
+}
+
 const cleanTarget = parallel(cleanHTTP);
 
 const bundleTarget = series(
@@ -373,7 +377,8 @@ const bundleTarget = series(
         processManifestOutdir,
         processIndexHTMLPWA,
         series(processApp, copyServiceWorkerNavScopePWA, processSW)
-    )
+    ),
+    deleteCopiedTSFiles
 );
 
 const bundleTargetGitHub = series(
@@ -382,7 +387,8 @@ const bundleTargetGitHub = series(
         processManifestOutdirGitHub,
         processIndexHTMLGitHub,
         series(processApp, copyServiceWorkerGitHub, processSW)
-    )
+    ),
+    deleteCopiedTSFiles
 );
 
 const serveTarget = series(runHTTPS);

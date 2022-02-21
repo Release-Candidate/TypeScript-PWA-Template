@@ -38,12 +38,11 @@ jobs:
 
       - name: Zip Package
         run: |
-          npm install
-          npm install --dev
-          npm install --save-dev purescript
-          npm run bundle
+          npm install -g yarn
+          yarn install
+          yarn bundle
           cd $GITHUB_WORKSPACE/http
-          zip -r -v notoy-pwa-${{ env.GIT_TAG_NAME }}.zip *
+          zip -r -v typescript-pwa-${{ env.GIT_TAG_NAME }}.zip *
 
       - name: Generate Changelog
         run: |
@@ -56,12 +55,12 @@ jobs:
         with:
           name: Version ${{ env.GIT_TAG_NAME }}
           body_path: first_changelog.md
-          files: ./http/notoy-pwa-${{ env.GIT_TAG_NAME }}.zip
+          files: ./http/typescript-pwa-${{ env.GIT_TAG_NAME }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
-          name: Notoy PWA Package
+          name: PWA Package
           path: ./http/*.zip

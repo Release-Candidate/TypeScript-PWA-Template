@@ -33,6 +33,7 @@
   },
   "scripts": {
     "targets": "gulp --tasks",
+    "eslint": "eslint src/**/*.ts tests/**/*.ts",
     "tscheck": "tsc --pretty --skipLibCheck --noEmit",
     "clean": "gulp clean",
     "test": "mocha",
@@ -43,6 +44,6 @@
     "serve": "gulp serve",
     "watch": "gulp watch",
     "tailwind": "gulp tailwind",
-    "translate": "gulp translate"
+    "translations": "gulp translate"
   }
 }
