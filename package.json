@@ -6,6 +6,7 @@
     "@types/mocha": "^9.1.0",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "benny": "^3.7.1",
     "c8": "^7.11.0",
     "chai": "^4.3.6",
     "delete": "^1.1.0",
@@ -44,6 +45,7 @@
     "serve": "gulp serve",
     "watch": "gulp watch",
     "tailwind": "gulp tailwind",
-    "translations": "gulp translate"
+    "translations": "gulp translate",
+    "bench": "node tests/main_bench.mjs"
   }
 }

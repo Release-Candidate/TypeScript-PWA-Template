@@ -84,6 +84,12 @@
 			"task": "watch",
 			"problemMatcher": [],
 			"label": "yarn: watch"
+		},
+		{
+			"type": "yarn",
+			"task": "bench",
+			"problemMatcher": [],
+			"label": "yarn: bench"
 		}
 	]
 }
