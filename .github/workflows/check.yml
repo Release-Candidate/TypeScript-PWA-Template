@@ -23,7 +23,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x 17.x]
+        node-version: [16.x, 17.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -35,7 +35,7 @@ jobs:
         cache: 'npm'
     - run: npm install -g yarn
     - run: yarn install
-    - run: yarn tscheck >> tscheck.txt
+    - run: yarn tscheck 2>&1 | tee  tscheck.txt
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
@@ -51,7 +51,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 17x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -63,7 +63,7 @@ jobs:
         cache: 'npm'
     - run: npm install -g yarn
     - run: yarn install
-    - run: yarn eslint >> eslint.txt 2>&1
+    - run: yarn eslint 2>&1 | tee eslint.txt
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
@@ -80,7 +80,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [16.x, 17.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -92,7 +92,7 @@ jobs:
         cache: 'npm'
     - run: npm install -g yarn
     - run: yarn install
-    - run: yarn bundle >> bundle.txt 2>&1
+    - run: yarn bundle 2>&1 | tee bundle.txt
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4

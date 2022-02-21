@@ -44,9 +44,6 @@ const appJSMap = appJS + ".map";
 // Manifest filename (original).
 const manifestJSON = "manifest.json";
 
-// Directory to exclude in the list of files to cache. Only the directory itself, not it's content!
-const excludeDir = "/icons";
-
 // Name of the TailwindCSS config file.
 const tailwindConfig = "./tailwind.config.js";
 
@@ -64,6 +61,9 @@ const assetDir = "./assets";
 
 // Directory holding the translations
 const localeDir = "./locales";
+
+// Directory with generated coverage info.
+const coverageDir = "./coverage";
 
 // Directory containing the sources
 const srcDir = "./src";
@@ -102,6 +102,8 @@ const connect = require("gulp-connect");
 const gulpEsbuild = require("gulp-esbuild");
 
 const fs = require("fs");
+
+const path = require("path");
 
 const filelist = require("filelist");
 
@@ -261,8 +263,8 @@ function getListOfFiles(dir) {
 
     const addedFiles = listOfFiles
         .toArray()
-        .filter((e) => e !== outdirNoSlashes + excludeDir)
-        .filter((e) => !e.endsWith(serviceWorkerTS))
+        .filter((e) => !fs.statSync(e).isDirectory())
+        .filter((e) => path.basename(e) !== serviceWorkerTS)
         .map((e) => '"' + e.replace(outdirNoSlashes + "/", dir) + '"')
         .concat([
             `"${dir}"`,
@@ -342,34 +344,37 @@ function watchSource(cb) {
 
 //==============================================================================
 // Copy everything in ./assets and ./locales to ./http
-function copyDir(dir) {
-    return src(dir + "/**/*").pipe(dest(outDir));
+function copyDir(dir, destPath) {
+    return src(dir + "/**/*").pipe(dest(outDir + destPath));
 }
 
 function copyAssets() {
-    return copyDir(assetDir);
+    return copyDir(assetDir, "");
 }
 
 function copyLocales() {
-    return copyDir(localeDir);
+    return copyDir(localeDir, "/locales");
 }
 
 //==============================================================================
 // Delete generated files.
 function delDirectory(dirName, cb) {
-    del([dirName], cb);
+    return del([dirName], cb);
 }
 
 function cleanHTTP(cb) {
-    delDirectory(outDir, cb);
-    cb();
+    return delDirectory(outDir, cb);
+}
+
+function cleanCoverage(cb) {
+    return delDirectory(coverageDir, cb);
 }
 
 function deleteCopiedTSFiles(cb) {
-    del([`${outDir}/*.ts`], cb);
+    return del([`${outDir}/*.ts`], cb);
 }
 
-const cleanTarget = parallel(cleanHTTP);
+const cleanTarget = parallel(cleanHTTP, cleanCoverage);
 
 const bundleTarget = series(
     parallel(copyAssets, copyLocales, runTailwind),
