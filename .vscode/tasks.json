@@ -1,0 +1,89 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "yarn",
+			"task": "bundle",
+			"problemMatcher": [],
+			"label": "yarn: bundle"
+		},
+		{
+			"type": "yarn",
+			"task": "bundleGitHub",
+			"problemMatcher": [],
+			"label": "yarn: bundleGitHub"
+		},
+		{
+			"type": "yarn",
+			"task": "clean",
+			"problemMatcher": [],
+			"label": "yarn: clean"
+		},
+		{
+			"type": "yarn",
+			"task": "coverage",
+			"problemMatcher": [],
+			"label": "yarn: coverage"
+		},
+		{
+			"type": "yarn",
+			"task": "eslint",
+			"problemMatcher": [],
+			"label": "yarn: eslint"
+		},
+		{
+			"type": "yarn",
+			"task": "install",
+			"problemMatcher": [],
+			"label": "yarn: install"
+		},
+		{
+			"type": "yarn",
+			"task": "serve",
+			"problemMatcher": [],
+			"label": "yarn: serve"
+		},
+		{
+			"type": "yarn",
+			"task": "tailwind",
+			"problemMatcher": [],
+			"label": "yarn: tailwind"
+		},
+		{
+			"type": "yarn",
+			"task": "targets",
+			"problemMatcher": [],
+			"label": "yarn: targets"
+		},
+		{
+			"type": "yarn",
+			"task": "test",
+			"problemMatcher": [],
+			"label": "yarn: test"
+		},
+		{
+			"type": "yarn",
+			"task": "testwatch",
+			"problemMatcher": [],
+			"label": "yarn: testwatch"
+		},
+		{
+			"type": "yarn",
+			"task": "translations",
+			"problemMatcher": [],
+			"label": "yarn: translations"
+		},
+		{
+			"type": "yarn",
+			"task": "tscheck",
+			"problemMatcher": [],
+			"label": "yarn: tscheck"
+		},
+		{
+			"type": "yarn",
+			"task": "watch",
+			"problemMatcher": [],
+			"label": "yarn: watch"
+		}
+	]
+}
